@@ -12,6 +12,16 @@ async function getUserActivity(username) {
 
         const events = await response.json();
 
+        events.forEach(event => {
+            const repo = event.repo.name;
+            const type = event.type;
+            const date = event.created_at.substring(0, 10);
+
+            if (type === 'pushEvent') {
+                console.log(`Commit for ${repo} at ${date}`);
+            }
+        });
+
     } catch (error) {
         console.error("Error getUserActivity : ", error);
     }
